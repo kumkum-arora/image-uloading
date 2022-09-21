@@ -67,6 +67,12 @@ class image
         return FALSE;  
        }  
     }
+    // logout function
+    public function logout($post)
+    {
+      session_destroy();
+    }
+
 //images upload
      public function upload($post)
     { 
@@ -117,12 +123,39 @@ class image
         echo "no record found";
       }
     }  
-    public function favourite($post)
-    { 
-      
+    // public function favourite($post)
+    // { 
+    //   $query = "SELECT * FROM upload WHERE title='$title' AND image='$newfilename'";
+    //   $result=$this->connection->query($query);
+    //   if($result->num_rows > 0)
+    //   {
+    //     $data=array();
+    //     while ($row=$result->fetch_assoc())
+    //     { 
+    //       $data[]=$row;
+    //     }
+    //     return $data;
+    //   }
+    //   else
+    //   {
+    //     echo "no record found";
+    //   } 
+    // }
+     public function delete($id)
+    {
+      $query="delete from upload where id='$id'";
+      $sql = $this->connection->query($query);
+      if($sql==true)
+      {
+        header("location:add.php");
+        unlink("photos/".$id['image']);
+      }
+      else
+      {   
+        echo "Record not deleted";
+      }
     }
-
-
+    
 }
 
 

@@ -22,7 +22,7 @@ include ('code.php');
 <div class="main">
 	<div class="main1">
 
-		<h1>Upload Image Here</h1>
+		<h1>Upload Your Post</h1>
 		<form method="post" action="" enctype="multipart/form-data">
 		<input type="hidden" name="id" value="<?php echo $row2['id']; ?>">
 		<p>Upload Image</p>

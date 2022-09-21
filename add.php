@@ -4,10 +4,27 @@ include ('code.php');
 $obj= new image();
 
 if(isset($_POST['add']))
-      {
-        echo "helo";
+{
       $obj->favourite($_POST);
-      }
+}
+
+if(isset($_POST['log']))
+ {
+    $obj->logout($_POST);
+ }
+
+ if(isset($_REQUEST['didd']))
+   {
+     $id=$obj->delete($_REQUEST['didd']);
+   }
+
+// if(isset($_SESSION['views']))
+//     $_SESSION['views'] = $_SESSION['views']+1;
+// else
+//     $_SESSION['views']=1;
+    
+// echo"views = ".$_SESSION['views'];
+
 
 
 ?>
@@ -49,9 +66,9 @@ if(isset($_POST['add']))
     }
     .main4{
     	width: 200px;
-    	height: 310px;
+    	height: 325px;
     	background-color: #eee;
-    	margin: 50px 50px 30px 30px;
+    	margin: 40px 50px 20px 30px;
     }
     .main5{
     	width: 180px;
@@ -79,7 +96,7 @@ if(isset($_POST['add']))
 	<ul>
 		<li><a href="login.php">Home</a></li>
 		<li><a href="fav.php">Favourites</a></li>
-		<button class="button"><a href="login.php">Logout</a></button>
+		<button class="button"><a href="login.php?log=1">Logout</a></button>
 		<a href="upload.php" class="button2">Upload_image</a>	
 	</ul>
 	</div>
@@ -98,10 +115,11 @@ if(isset($_POST['add']))
       	<!-- //div for add content -->
       	<div class="main5"><?php echo $row1['title']?></div>
       	<form method="post" action="" enctype="multipart/form-data">
-        <input type="submit" name="add" class="fav" value="add to favourites" />
+        <input type="submit" name="add" class="fav" value="add to favourites"/>
         <!-- <a href="fav.php" name="add" class="fav">add to favourites</a> -->
         <i class="fa-solid fa-eye" style="float: right; margin: 10px 10px;"></i>
     </form>
+    <a href="add.php?didd=<?php echo $row1['id']?>"><i class="fa-solid fa-trash"style=" margin: 10px 10px;"></i></a>
         </div>
        <?php } ?>
       </div>
