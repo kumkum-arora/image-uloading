@@ -23,7 +23,7 @@ class image
        }
 
    	}
-   	//For Insert Data in backend
+//For Insert Data in backend
     public function insertdata($post)
     {
         $name=$this->connection->real_escape_string($_POST['name']);
@@ -50,7 +50,7 @@ class image
                 </script>";
         }
     }
-    //login function
+//login function
    public function Login($post)
     {
       $email= $_POST['email'];  
@@ -67,7 +67,7 @@ class image
         return FALSE;  
        }  
     }
-    // logout function
+// logout function
     public function logout($post)
     {
       session_destroy();
@@ -76,8 +76,6 @@ class image
 //images upload
      public function upload($post)
     { 
-
-      echo "helo";
       $title=$this->connection->real_escape_string($_POST['title']);
       $filename=$_FILES['image']['name'];
       $filepath=$_FILES['image']['tmp_name'];
@@ -123,24 +121,7 @@ class image
         echo "no record found";
       }
     }  
-    // public function favourite($post)
-    // { 
-    //   $query = "SELECT * FROM upload WHERE title='$title' AND image='$newfilename'";
-    //   $result=$this->connection->query($query);
-    //   if($result->num_rows > 0)
-    //   {
-    //     $data=array();
-    //     while ($row=$result->fetch_assoc())
-    //     { 
-    //       $data[]=$row;
-    //     }
-    //     return $data;
-    //   }
-    //   else
-    //   {
-    //     echo "no record found";
-    //   } 
-    // }
+// delete post 
      public function delete($id)
     {
       $query="delete from upload where id='$id'";

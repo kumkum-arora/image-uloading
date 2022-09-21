@@ -34,13 +34,11 @@ if(isset($_POST['register']))
 		<input type="text" class="text-md block px-3 py-2 rounded-lg w-full bg-white border-2 border-gray-300 placeholder-gray-600 focus:placeholder-gray-500 focus:bg-white focus:border-gray-600 focus:outline-none" name="uname">
 		<p>Password</p>
 		<input type="Password" class="text-md block px-3 py-2 rounded-lg w-full bg-white border-2 border-gray-300 placeholder-gray-600 focus:placeholder-gray-500 focus:bg-white focus:border-gray-600 focus:outline-none" name="password">
+		
 		<p>Already Have an account<a href="login.php"><u> Click here</u></a> for login.</p>
-		<button class="mt-3 text-lg font-semibold 
-                bg-gray-800 w-full text-white rounded-lg
-                px-6 py-3 block  hover:text-white hover:bg-black" name="register" value="Register">
-                Register
-              </button>
-         </form>
+
+		<button class="mt-3 text-lg font-semibold bg-gray-800 w-full text-white rounded-lg px-6 py-3 block  hover:text-white hover:bg-black" name="register" value="Register">Register</button>
+    </form>
         
 	</div>
   </div>

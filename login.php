@@ -1,28 +1,25 @@
+<!-- // display login page -->
 <?php
+ include ('code.php');
+ $obj = new image();
 
-   include ('code.php');
-   $obj = new image();
-
-    if(isset($_POST['login']))
-    {  
+ if(isset($_POST['login']))
+ {  
      
-     $user = $obj->Login($_POST);  
-      if ($user) 
-      {  
-         echo "<script>
-         alert('Login Successful');
-         window.location.href='add.php';
-         </script>";
-         // $_SESSION['username'];
-         // $_SESSION['id'];
-      } 
-      else 
-       {  
-            // Registration Failed  
-            echo "<script>alert('Emailid / Password Not Match')</script>";  
-       } 
-     }
-   
+    $user = $obj->Login($_POST);  
+    if ($user) 
+    {  
+      echo "<script>
+      alert('Login Successful');
+      window.location.href='add.php';
+      </script>";
+    } 
+    else 
+    {  
+      echo "<script>alert('Emailid / Password Not Match')</script>";  
+    }
+
+  }
 
 ?>
  
@@ -32,14 +29,13 @@
 	<title>Login Page</title>
 	 <script src="https://cdn.tailwindcss.com"></script>
 	 <link rel="stylesheet" type="text/css" href="style.css">
+	 <link rel="stylesheet" type="text/css" href="s1.css">
 </head>
 <body>
 	<div class="bar">
 	<ul>
 		<li><a href="login.php">Login</a></li>
-		<li><a href="create.php">Register</a></li>
-	
-		
+		<li><a href="create.php">Register</a></li>	
 	</ul>
 	</div>
 	<div class="main">
