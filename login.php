@@ -14,6 +14,9 @@ if (isset($_POST['login'])) {
 	} else {
 		echo "<script>alert('Emailid / Password Not Match')</script>";
 	}
+} else {
+
+	echo "<script>alert('login to continue')</script>";
 }
 
 ?>

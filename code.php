@@ -51,8 +51,12 @@ class image
     $query = "SELECT * FROM login WHERE email='$email' AND password = '$password'";
     $result = $this->connection->query($query);
     if ($result->num_rows > 0) {
-      $_SESSION['login'] = true;
-      $_SESSION['uname'] = $email;
+      $row = $result->fetch_assoc();
+      // $_SESSION['login'] = true;.
+      $_SESSION['uid'] = $row['id'];
+      $_SESSION['uname'] = $row['email'];
+      $_SESSION['pass'] = $row['password'];
+      // print_r($_SESSION['uid']);
       return TRUE;
     } else {
       return FALSE;
@@ -61,13 +65,27 @@ class image
   // logout function
   public function logout($post)
   {
-    session_destroy();
+    if (isset($_SESSION['uname'])) {
+
+      session_unset();
+      session_destroy();
+      header('location:login.php');
+      // if (session_destroy()) {
+      //   echo "<script>
+      //     alert('are you sure to logout');
+      //     window.location.href='login.php';
+      //     </script>";
+      // } else {
+      //   echo "<script>alert(Failed to logout)</script>";
+      // }
+    }
   }
 
   //images upload
   public function upload($post)
   {
     $title = $this->connection->real_escape_string($_POST['title']);
+    $uid = $_SESSION['uid'];
     $filename = $_FILES['image']['name'];
     $filepath = $_FILES['image']['tmp_name'];
     $imagename = explode(".", $filename);
@@ -77,7 +95,7 @@ class image
     $row = $result->fetch_assoc();
     $id = $row['Auto_increment'];
     $newfilename = $id . "." . $ext;
-    $query = "insert into upload(image,title) values('$newfilename','$title')";
+    $query = "insert into upload(image,title,uid) values('$newfilename','$title',$uid)";
     $sql = $this->connection->query($query);
     if ($sql == true) {
       echo "<script>
@@ -91,11 +109,11 @@ class image
     }
   }
   // Display image
-  public function displayData($post)
+  public function displayData($id)
   {
-    $query = "select * from upload";
+    $query = "select * from upload where uid =$id";
     $result = $this->connection->query($query);
-    if ($result->num_rows > 0) {
+    if ($result) {
       $data = array();
       while ($row = $result->fetch_assoc()) {
         $data[] = $row;
@@ -110,11 +128,28 @@ class image
   {
     $query = "delete from upload where id='$id'";
     $sql = $this->connection->query($query);
-    if ($sql == true) {
+    $row = $sql->fetch_assoc();
+
+    if ($row) {
       header("location:add.php");
-      unlink("photos/" . $id['image']);
+      unlink("photos/" . $row['image']);
     } else {
       echo "Record not deleted";
     }
   }
+
+  //favourite funtion
+  // public function addToFavourite($id)
+  // {
+  //   $uid = $_SESSION['uid'];
+  //   $query = "insert into favourite(uid) values($uid)";
+  //   $result = $this->connect->query($query);
+  //   if ($result) {
+
+  //     echo "<script>
+  //               alert('Successfully added');
+  //               window.location.href='add.php';
+  //               </script>";
+  //   }
+  // }
 }

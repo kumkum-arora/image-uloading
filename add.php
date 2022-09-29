@@ -3,9 +3,11 @@
 include('code.php');
 $obj = new image();
 
-if (isset($_POST['log'])) {
-  $obj->logout($_POST);
+if (!empty($_POST['log'])) {
+  $user = $obj->logout($_POST);
 }
+
+
 
 if (isset($_REQUEST['didd'])) {
   $id = $obj->delete($_REQUEST['didd']);
@@ -43,24 +45,28 @@ if (isset($_REQUEST['didd'])) {
     <div class="main3">
 
       <?php
-      $row = $obj->displayData($_POST);
-      foreach ($row as $row1) { ?>
+      $uid = $_SESSION['uid'];
 
-        <!-- // inner small div for posts -->
+      $row = $obj->displayData($uid);
+      if (isset($row)) {
+        foreach ($row as $row1) { ?>
 
-        <div class="main4">
-          <img src="photos/<?php echo $row1['image'] ?>" style="width: 200px; height: 200px;" <?php echo $row1['image'] ?>>
-          <!-- //div for add content -->
+          <!-- // inner small div for posts -->
 
-          <div class="main5"><?php echo $row1['title'] ?></div>
-          <form method="post" action="" enctype="multipart/form-data">
-            <input type="submit" name="add" class="fav" value="add to favourites" />
-            <!-- <a href="fav.php" name="add" class="fav">add to favourites</a> -->
-            <i class="fa-solid fa-eye" style="float: right; margin: 10px 10px;"></i>
-          </form>
-          <a href="add.php?didd=<?php echo $row1['id'] ?>"><i class="fa-solid fa-trash" style=" margin: 10px 10px;"></i></a>
-        </div>
-      <?php } ?>
+          <div class="main4">
+            <img src="photos/<?php echo $row1['image'] ?>" style="width: 200px; height: 200px;" <?php echo $row1['image'] ?>>
+            <!-- //div for add content -->
+
+            <div class="main5"><?php echo $row1['title'] ?></div>
+            <form method="post" action="" enctype="multipart/form-data">
+              <input type="submit" name="add" class="fav" value="add to favourites" />
+              <!-- <a href="fav.php" name="add" class="fav">add to favourites</a> -->
+              <i class="fa-solid fa-eye" style="float: right; margin: 10px 10px;"></i>
+            </form>
+            <a href="add.php?didd=<?php echo $row1['id'] ?>"><i class="fa-solid fa-trash" style=" margin: 10px 10px;"></i></a>
+          </div>
+      <?php }
+      } ?>
     </div>
   </div>
 </body>
