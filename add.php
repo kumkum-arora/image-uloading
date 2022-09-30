@@ -59,15 +59,7 @@ if (isset($_REQUEST['didd'])) {
               <input type="submit" name="add" class="bg-gray-800 text-white rounded-lg px-6  hover:text-white hover:bg-black, fav" value="add to favourites" />
               <!-- <a href="fav.php" name="add" class="fav ">add to favourites</a> -->
           </form>
-          <?php
-          if (isset($_POST['view'])) {
-            $row = $obj->view($_POST);
-            foreach ($row as $ro) {
-              echo $ro['view'];
-            }
-          }
-          ?>
-          <!-- <a href="add.php?didd=<echo $row1['id'] ?>"><i class="fa-solid fa-trash" style=" margin: 10px 10px;"></i></a> -->
+          <a href="add.php?didd=<?php echo $row1['id'] ?>"><i class="fa-solid fa-trash" style=" margin: 10px 10px;"></i></a>
     </div>
 <?php }
       } ?>

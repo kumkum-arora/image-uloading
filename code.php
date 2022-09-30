@@ -125,15 +125,6 @@ class image
       echo "no record found";
     }
   }
-  public function view($id)
-  {
-    $query = "update upload set view= view + 1 where id = $id";
-    $result = $this->connection->query($query);
-    if ($result) {
-      $row = $result->fetch_assoc();
-      return $row;
-    }
-  }
   //function for show public images
   public function publicpost($id)
   {
@@ -163,22 +154,4 @@ class image
       echo "Record not deleted";
     }
   }
-
-  //favourite funtion
-  // public function addToFavourite($id)
-  // {
-  //     $userid = $_SESSION['uid'];
-  //     $query = "insert into favourite(id, uid) values($id, $uid)";
-  //     $result = $this->connect->query($query);
-  //     if ($result) {
-  //     
-  //         <script>
-  //             alert("Post added Successfully.")
-  //             window.location.href = 'fav.php';
-  //         </script>
-  //     
-  //     }
-  // }
-
-
 }
