@@ -27,8 +27,8 @@ if (isset($_POST['login'])) {
 <head>
 	<title>Login Page</title>
 	<script src="https://cdn.tailwindcss.com"></script>
-	<link rel="stylesheet" type="text/css" href="style.css">
-	<link rel="stylesheet" type="text/css" href="s1.css">
+	<!-- <link rel="stylesheet" type="text/css" href="style.css"> -->
+	<link rel="stylesheet" type="text/css" href="st1.css">
 </head>
 
 <body>

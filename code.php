@@ -56,7 +56,7 @@ class image
       $_SESSION['uid'] = $row['id'];
       $_SESSION['uname'] = $row['email'];
       $_SESSION['pass'] = $row['password'];
-      // print_r($_SESSION['uid']);
+      $_SESSION['name'] = $row['name'];
       return TRUE;
     } else {
       return FALSE;
@@ -85,6 +85,8 @@ class image
   public function upload($post)
   {
     $title = $this->connection->real_escape_string($_POST['title']);
+    $privacy = $this->connection->real_escape_string($_POST['privacy']);
+    $view = 0;
     $uid = $_SESSION['uid'];
     $filename = $_FILES['image']['name'];
     $filepath = $_FILES['image']['tmp_name'];
@@ -95,7 +97,7 @@ class image
     $row = $result->fetch_assoc();
     $id = $row['Auto_increment'];
     $newfilename = $id . "." . $ext;
-    $query = "insert into upload(image,title,uid) values('$newfilename','$title',$uid)";
+    $query = "insert into upload(image,title,uid,privacy,view) values('$newfilename','$title',$uid,'$privacy',$view)";
     $sql = $this->connection->query($query);
     if ($sql == true) {
       echo "<script>
@@ -108,10 +110,34 @@ class image
       echo "failed to upload";
     }
   }
-  // Display image
-  public function displayData($id)
+  // Display private image
+  public function privatepost($id)
   {
     $query = "select * from upload where uid =$id";
+    $result = $this->connection->query($query);
+    if ($result) {
+      $data = array();
+      while ($row = $result->fetch_assoc()) {
+        $data[] = $row;
+      }
+      return $data;
+    } else {
+      echo "no record found";
+    }
+  }
+  public function view($id)
+  {
+    $query = "update upload set view= view + 1 where id = $id";
+    $result = $this->connection->query($query);
+    if ($result) {
+      $row = $result->fetch_assoc();
+      return $row;
+    }
+  }
+  //function for show public images
+  public function publicpost($id)
+  {
+    $query = "select * from upload where privacy='public'";
     $result = $this->connection->query($query);
     if ($result) {
       $data = array();
@@ -141,15 +167,18 @@ class image
   //favourite funtion
   // public function addToFavourite($id)
   // {
-  //   $uid = $_SESSION['uid'];
-  //   $query = "insert into favourite(uid) values($uid)";
-  //   $result = $this->connect->query($query);
-  //   if ($result) {
-
-  //     echo "<script>
-  //               alert('Successfully added');
-  //               window.location.href='add.php';
-  //               </script>";
-  //   }
+  //     $userid = $_SESSION['uid'];
+  //     $query = "insert into favourite(id, uid) values($id, $uid)";
+  //     $result = $this->connect->query($query);
+  //     if ($result) {
+  //     
+  //         <script>
+  //             alert("Post added Successfully.")
+  //             window.location.href = 'fav.php';
+  //         </script>
+  //     
+  //     }
   // }
+
+
 }

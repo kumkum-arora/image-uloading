@@ -7,7 +7,6 @@ if (!empty($_POST['save'])) {
 	//echo "string";
 	$obj->upload($_POST, $_FILES);
 }
-
 ?>
 <!DOCTYPE html>
 <html>
@@ -17,7 +16,7 @@ if (!empty($_POST['save'])) {
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>add image</title>
 	<script src="https://cdn.tailwindcss.com"></script>
-	<link rel="stylesheet" type="text/css" href="style.css">
+	<link rel="stylesheet" type="text/css" href="st1.css">
 </head>
 
 <body>
@@ -33,7 +32,13 @@ if (!empty($_POST['save'])) {
 
 				<p>Add Title</p>
 				<input type="text" class="text-md block px-3 py-2 rounded-lg w-full bg-white border-2 border-gray-300 placeholder-gray-600 shadow-mdfocus:placeholder-gray-500focus:bg-white focus:border-gray-600 focus:outline-none" name="title" class="title">
-				<input type="submit" class="mt-3 text-lg font-semibold bg-gray-800 w-full text-white rounded-lg px-6 py-3 block  hover:text-white hover:bg-black" name="save" value="Register">
+				<p>Privacy</p>
+				<select name="privacy" class="text-md block px-3 py-2 rounded-lg w-full bg-white border-2 border-gray-300 placeholder-gray-600 shadow-mdfocus:placeholder-gray-500focus:bg-white focus:border-gray-600 focus:outline-none" aria-label="Default select example">
+					<option value="" selected>Select</option>
+					<option value="public">Public</option>
+					<option value="private">Private</option>
+				</select>
+				<input type="submit" class="bg-gray-800 hover:bg-black" name="save" value="Register">
 			</form>
 		</div>
 	</div>

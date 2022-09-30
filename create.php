@@ -12,7 +12,7 @@ if (isset($_POST['register'])) {
 <head>
 	<title>Register</title>
 	<script src="https://cdn.tailwindcss.com"></script>
-	<link rel="stylesheet" type="text/css" href="style.css">
+	<link rel="stylesheet" type="text/css" href="st1.css">
 </head>
 
 <body>
